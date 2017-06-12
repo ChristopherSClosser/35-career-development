@@ -9,14 +9,14 @@ HashTable.prototype.hashKey = function(key) {
   if(!key) throw new Error('key required');
   // let hash = key.split('').reduce((acc, curr) => acc + curr.charCodeAt(0), 0) % this.size;
 
-  // :::: this method is more than twice as time performant, with a bit more space used 70+ms compared to 180+ms in above hash COLLISIONS POSSIBLE :::: \\
+  // :::: this method is more than twice as time performant using more than just a few buckets, with a bit more space used 70+ms compared to 180+ms in above hash COLLISIONS POSSIBLE :::: \\
   // for (var i=0;i< key.length;i++){
   //   hash += key.charCodeAt(i) * i;
   // }
   //
   // return hash;
 
-  // :::: this method uses most every bucket no speed advantage NO COLLISIONS :::: \\
+  // :::: this method uses most every bucket which is allready allocated no speed advantage NO COLLISIONS :::: \\
   let hash = 0;
   for (var i = 0; i < key.length; i++) {
     hash = (hash<<5) - hash;
